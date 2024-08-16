@@ -1,5 +1,5 @@
 """
-ASGI config for DjangoApp project.
+ASGI config for TeamProjectApp project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

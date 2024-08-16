@@ -1,5 +1,5 @@
 """
-WSGI config for DjangoApp project.
+WSGI config for TeamProjectApp project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
