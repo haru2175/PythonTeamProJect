@@ -15,6 +15,7 @@ class NaverNews(models.Model): # 무비가 모델을 상속받는다는 뜻
     # 메타 클래스 : 기본 컬럼 이외에 모델의 설정 정보를 담고 있는 내부 클래스
     # 예를 들어 테이블 이름이나, 정렬 방식 등을 설정할 수 있습니다.
     class Meta:
+        app_label = 'TeamProject'
         db_table = 'NaverNews' # 이 모델은 'NaverNews' 테이블과 연동됩니다.
 
     # __str__ 함수는 객체를 문자열로 표현하고자 할때 사용하는 함수입니다.

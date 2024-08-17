@@ -1,5 +1,5 @@
 """
-URL configuration for TeamProjectApp project.
+URL configuration for DjangoApp project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -25,6 +25,7 @@ urlpatterns = [
 
     # 영화 목록을 표시해주는 url
     # path('요청 할 url 패턴/', 호출 할 View 함수, name='url 패턴에 부여한 이름'),
-    # path('movies/', views.movie_list, name='movie_list'),
-    # path('movies/pagination', views.movie_pagination, name='movie_pagination'),
+    path('NaverNews/', views.NaverNews_list, name='NaverNews_list'),
+    # path('NaverNews/pagination', views.NaverNews_pagination, name='NaverNews_pagination'),
 ]
+
