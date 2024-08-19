@@ -19,7 +19,8 @@ def NaverNews_list(request): # request는 http 요청 객체입니다.
     # 요청(request)한 mode, keyword 파라미터를 챙깁니다.
     category = request.GET.get('category', None)
     company = request.GET.get('company', None)
-    NewsCategory = NaverNews.objects.values('nCompany').distinct()
+    NewsCategory = NaverNews.objects.values('nCategory').distinct()
+    NewsCompany = NaverNews.objects.values('nCompany').distinct()
 
     if category:
         NaverNewss = NaverNews.objects.filter(nCategory=category)
@@ -83,7 +84,7 @@ def NaverNews_list(request): # request는 http 요청 객체입니다.
     print('query_params=[' + str(query_params) + ']')
 
 
-    context = {'NaverNewsList': NaverNewsList, 'NewsCategory': NewsCategory, 'beginPage': beginPage, 'endPage': endPage, 'page_range': page_range, 'has_previous': has_previous, 'has_next': has_next, 'query_params': query_params}
+    context = {'NaverNewsList': NaverNewsList, 'NewsCategory': NewsCategory, "NewsCompany" : NewsCompany,  'beginPage': beginPage, 'endPage': endPage, 'page_range': page_range, 'has_previous': has_previous, 'has_next': has_next, 'query_params': query_params}
 
     return render(request, 'TeamProject/NaverNews_list.html', context)
 # end def movie_pagination
