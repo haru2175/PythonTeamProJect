@@ -8,18 +8,32 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div class="container mt-3">
+<div class="container mt-5">
     <h2 class="text-center mb-4">네이버 뉴스</h2>
     <p class="text-center mb-4">실시간 네이버 뉴스를 보다 편리하게 보실 수 있습니다.</p>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
         {% for news in NaverNews %}
-            {% if news.nImage %}
-                <img src="{{news.nImage}}">
-            {% endif %}
-            <td>{{ news.nContent }}</td>
-            <td>출처 : <a href="{{news.nLink }}" target="_blank">{{news.nLink }} </a></td>
+            <div class="col d-flex justify-content-center">
+                <div class="card h-100" style="max-width: 1200px;">
+                    {% if news.nImage %}
+                        <img src="{{news.nImage}}" class="card-img-top" alt="News Image">
+                    {% endif %}
+                    <div class="card-body">
+                        <p class="card-text">{{ news.nContent }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">출처 : <a href="{{news.nLink }}" target="_blank">{{news.nLink }} </a></small>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-        <button id="buttonBack" onClick="buttonBackBtn()">뒤로가기</button>
+    </div>
+    <div class="text-end mt-4">
+        <button id="buttonBack" class="btn btn-secondary" onClick="buttonBackBtn()">뒤로가기</button>
+    </div>
 </div>
+
 <script>
     function buttonBackBtn() {
         window.location.href =  window.location.origin + '/NaverNews';
