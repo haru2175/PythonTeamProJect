@@ -19,14 +19,15 @@ def NaverNews_list(request): # request는 http 요청 객체입니다.
     # 요청(request)한 mode, keyword 파라미터를 챙깁니다.
     category = request.GET.get('category', None)
     company = request.GET.get('company', None)
-    NewsCategory = NaverNews.objects.all()
+    NewsCategory = NaverNews.objects.values('nCompany').distinct()
+
     if category:
         NaverNewss = NaverNews.objects.filter(nCategory=category)
     else:
         NaverNewss = NaverNews.objects.all()
 
     if company:
-        NaverNewss = NaverNews.objects.filter(nCompany=company)
+        NaverNewss = NaverNewss.filter(nCompany=company)
 
     pageSize = 10
     paginator = Paginator(NaverNewss, pageSize)

@@ -19,6 +19,7 @@
     <p class="text-center mb-4">실시간 네이버 뉴스를 보다 편리하게 보실 수 있습니다.</p>
 
     <div class="btn-group">
+        <button type="button" class="btn btn-outline-success" onclick="buttonCategory('전체')">전체</button>
         <button type="button" class="btn btn-outline-success" onclick="buttonCategory('정치')">정치</button>
         <button type="button" class="btn btn-outline-success" onclick="buttonCategory('경제')">경제</button>
         <button type="button" class="btn btn-outline-success" onclick="buttonCategory('사회')">사회</button>
@@ -28,6 +29,7 @@
         <div class="btn-group">
             <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">언론사별</button>
             <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" onclick="buttonCompany('전체')">전체</a>
                 {% for news in NewsCategory %}
                 <a class="dropdown-item" href="#" onclick="buttonCompany('{{news.nCompany}}')">{{news.nCompany}}</a>
                 {% endfor %}
@@ -117,11 +119,47 @@
 {% endblock %}
 
 <script>
+    var queryString = window.location.search;
+
+    // URLSearchParams 객체를 생성한다.
+    var urlParams = new URLSearchParams(queryString);
+
+    // 특정 파라미터의 값을 가져온다 (예: 'exampleParam')
+    var company = urlParams.get('company');
+    var category = urlParams.get('category');
+
     function buttonCategory(category) {
-        window.location.href =  window.location.origin + '/NaverNews?category=' + category;
+        if (company) {
+            if(category == '전체'){
+                window.location.href =  window.location.origin + '/NaverNews?company=' + company;
+            } else{
+                window.location.href =  window.location.origin + '/NaverNews?category=' + category + '&company=' + company;
+            }
+        }
+        else {
+            if(category == '전체'){
+                window.location.href =  window.location.origin + '/NaverNews';
+            } else{
+                window.location.href =  window.location.origin + '/NaverNews?category=' + category;
+            }
+        }
     }
+
     function buttonCompany(company) {
-        window.location.href =  window.location.origin + '/NaverNews?company=' + company;
+        if (category) {
+            if(company == '전체'){
+                window.location.href =  window.location.origin + '/NaverNews?category=' + category;
+            } else{
+                window.location.href =  window.location.origin + '/NaverNews?category=' + category + '&company=' + company;
+            }
+        }
+        else {
+            if(company == '전체'){
+                window.location.href =  window.location.origin + '/NaverNews';
+            } else{
+                window.location.href =  window.location.origin + '/NaverNews?company=' + company;
+            }
+        }
     }
 </script>
 </body>
