@@ -25,6 +25,7 @@ urlpatterns = [
 
     # 영화 목록을 표시해주는 url
     # path('요청 할 url 패턴/', 호출 할 View 함수, name='url 패턴에 부여한 이름'),
+    path('NaverNews/view', views.NaverNews_view, name='NaverNews_view'),
     path('NaverNews/', views.NaverNews_list, name='NaverNews_list'),
     # path('NaverNews/pagination', views.NaverNews_pagination, name='NaverNews_pagination'),
 ]
