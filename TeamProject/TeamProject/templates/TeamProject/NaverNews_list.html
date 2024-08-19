@@ -53,7 +53,7 @@
             <td>{{ news.nIdx }}</td>
             <td>{{ news.nCategory }}</td>
             <td>{{ news.nCompany }}</td>
-            <td><a href="{{ news.nLink }}"/> {{ news.nTitle }}</td>
+            <td><a href="/NaverNews/view?idx={{news.nIdx}}"/> {{ news.nTitle }}</td>
             <!--<td><a href="{{ news.nLink }}" />링크</td>-->
         </tr>
         {% endfor %}
