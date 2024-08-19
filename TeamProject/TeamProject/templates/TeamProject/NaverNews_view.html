@@ -11,94 +11,18 @@
 <div class="container mt-3">
     <h2 class="text-center mb-4">네이버 뉴스</h2>
     <p class="text-center mb-4">실시간 네이버 뉴스를 보다 편리하게 보실 수 있습니다.</p>
-
-    <div class="btn-group">
-        <button type="button" class="btn btn-secondary" onclick="filterByCategory(0)">전체</button>
-        <button type="button" class="btn btn-secondary" onclick="filterByCategory(1)">정치</button>
-        <button type="button" class="btn btn-secondary" onclick="filterByCategory(2)">경제</button>
-        <button type="button" class="btn btn-secondary" onclick="filterByCategory(3)">사회</button>
-        <button type="button" class="btn btn-secondary" onclick="filterByCategory(4)">생활/문화</button>
-        <button type="button" class="btn btn-secondary" onclick="filterByCategory(5)">IT/과학</button>
-        <button type="button" class="btn btn-secondary" onclick="filterByCategory(6)">세계</button>
-        <div class="btn-group">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">언론사별</button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">주간경향</a>
-                <a class="dropdown-item" href="#">신동아</a>
-                <a class="dropdown-item" href="#">시사IN</a>
-                <a class="dropdown-item" href="#">매경이코노미</a>
-                <a class="dropdown-item" href="#">주간동아</a>
-                <a class="dropdown-item" href="#">이코노미스트</a>
-                <a class="dropdown-item" href="#">시사저널</a>
-                <a class="dropdown-item" href="#">한경비즈니스</a>
-                <a class="dropdown-item" href="#">한겨례21</a>
-                <a class="dropdown-item" href="#">더스쿠프</a>
-                <a class="dropdown-item" href="#">주간조선</a>
-                <a class="dropdown-item" href="#">월간산</a>
-            </div>
-        </div>
-    </div>
-
-    <button type="button" class="btn btn-outline-secondary" >최신 뉴스 새로고침</button>
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>번호&nbsp;&nbsp;&nbsp;</th>
-            <th>카테고리</th>
-            <th>언론사&nbsp;&nbsp;&nbsp;</th>
-            <th>기사 제목</th>
-            <!--<th>출처</th>-->
-        </tr>
-        </thead>
-        <tbody>
         {% for news in NaverNews %}
-        <tr>
-            <td>{{ news.nIdx }}</td>
-            <td>{{ news.nCategory }}</td>
-            <td>{{ news.nCompany }}</td>
-            <td><a href="view/?idx={{ news.nIdx }}" /> {{ news.nTitle }}</td>
-            <!--<td><a href="{{ news.nLink }}" />링크</td>-->
-        </tr>
+            {% if news.nImage %}
+                <img src="{{news.nImage}}">
+            {% endif %}
+            <td>{{ news.nContent }}</td>
+            <td>출처 : <a href="{{news.nLink }}">{{news.nLink }} </a></td>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <br/><br/>
-    <ul class="pagination justify-content-center">
-        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <!-- <li class="page-item active"><a class="page-link" href="#">2</a></li> -->
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">5</a></li>
-        <li class="page-item"><a class="page-link" href="#">6</a></li>
-        <li class="page-item"><a class="page-link" href="#">7</a></li>
-        <li class="page-item"><a class="page-link" href="#">8</a></li>
-        <li class="page-item"><a class="page-link" href="#">9</a></li>
-        <li class="page-item"><a class="page-link" href="#">10</a></li>
-        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-    </ul>
+        <button id="buttonBack" onClick="buttonBackBtn()">뒤로가기</button>
 </div>
 <script>
-    category = null
-    company = null;
-    function filterByCategory(category1) {
-        console.log(category1)
-        if (category1 == 0) {
-            let url = new URL('http://127.0.0.1:8000/NaverNews/'); // 현재 페이지의 URL을 가져옵니다.
-
-            // 페이지를 새로운 URL로 이동
-            window.location.href = url.toString();
-        }
-        else {
-            <!--let url = new URL(window.location.href); // 현재 페이지의 URL을 가져옵니다.
-            url.searchParams.set('category', category1); // 'category' 파라미터에 값을 설정합니다.
-
-            // 페이지를 새로운 URL로 이동
-            window.location.href = url.toString();-->
-        }
+    function buttonBackBtn() {
+        window.location.href =  window.location.origin + '/NaverNews';
     }
 </script>
 </body>
