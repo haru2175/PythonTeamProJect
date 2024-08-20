@@ -46,27 +46,27 @@
 <div class="container mt-3">
      <img id="logo" src="{% static 'images/logo.png' %}" alt="네이버">
     <!--<p class="text-center mb-4">실시간 네이버 뉴스를 보다 편리하게 보실 수 있습니다.</p>-->
-
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <button type="button" class="btn btn-outline-success 전체" onclick="buttonCategory('전체')">전체</button>
-        {% for news in NewsCategory %}
-        <button type="button" class="btn btn-outline-success {{ news.nCategory }}" onclick="buttonCategory('{{ news.nCategory }}')">{{news.nCategory}}</button>
-        {% endfor %}
-        <div class="btn-group">
-            <select class="btn btn-success" id="companySelect">
-                <option>전체</option>
-                {% for news in NewsCompany %}
-                <option value="{{news.nCompany}}">{{news.nCompany}}</option>
-                {% endfor %}
-            </select>
+    <div style="display: flex; gap: 530px;">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <button type="button" class="btn btn-outline-success 전체" onclick="buttonCategory('전체')">전체</button>
+            {% for news in NewsCategory %}
+            <button type="button" class="btn btn-outline-success {{ news.nCategory }}" onclick="buttonCategory('{{ news.nCategory }}')">{{news.nCategory}}</button>
+            {% endfor %}
+            <div class="btn-group">
+                <select class="btn btn-success" id="companySelect">
+                    <option>전체</option>
+                    {% for news in NewsCompany %}
+                    <option value="{{news.nCompany}}">{{news.nCompany}}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
+        <button type="button" class="btn btn-success" id="crawling" onclick="crawling()">최신 뉴스 새로고침</button>
+        <button class="btn btn-success" id="loading" style="display:none;">
+            <span class="spinner-border spinner-border-sm"></span>
+            Loading..
+        </button>
     </div>
-
-    <button type="button" class="btn btn-success" id="crawling" onclick="crawling()">최신 뉴스 새로고침</button>
-    <button class="btn btn-success" id="loading" style="display:none;">
-        <span class="spinner-border spinner-border-sm"></span>
-        Loading..
-    </button>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -89,13 +89,12 @@
         </tbody>
     </table>
 
-
+    <div class="btn-group-end">
+      <button type="button" class="btn btn-success">그래프로 보기</button>
+      <button type="button" class="btn btn-success">워드클라우드</button>
+    </div>
 </div>
 
-<div class="btn-group-end" style="margin-left: 620px; padding: 10px;">
-  <button type="button" class="btn btn-success">그래프로 보기</button>
-  <button type="button" class="btn btn-success">워드클라우드</button>
-</div>
 
 <!-- 페이징 네비게이션 -->
 <nav aria-label="Page navigation" class="my-4">
