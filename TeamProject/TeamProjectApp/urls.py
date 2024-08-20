@@ -27,6 +27,9 @@ urlpatterns = [
     # path('요청 할 url 패턴/', 호출 할 View 함수, name='url 패턴에 부여한 이름'),
     path('NaverNews/view', views.NaverNews_view, name='NaverNews_view'),
     path('NaverNews/', views.NaverNews_list, name='NaverNews_list'),
+    path('run_naver_news/', views.run_naver_news, name='run_naver_news'),
+    path('run_json_to_csv/', views.run_json_to_csv, name='run_json_to_csv'),
+    path('run_csv_naver_news/', views.run_csv_naver_news, name='run_csv_naver_news'),
     # path('NaverNews/pagination', views.NaverNews_pagination, name='NaverNews_pagination'),
 ]
 
