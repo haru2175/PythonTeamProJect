@@ -62,8 +62,11 @@
         </div>
     </div>
 
-    <button type="button" class="btn btn-success" onclick="crawling()">최신 뉴스 새로고침</button>
-
+    <button type="button" class="btn btn-success" id="crawling" onclick="crawling()">최신 뉴스 새로고침</button>
+    <button class="btn btn-success" id="loading" style="display:none;">
+        <span class="spinner-border spinner-border-sm"></span>
+        Loading..
+    </button>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -116,7 +119,7 @@
         <li class="page-item"><a class="page-link {{i}}" href="?page={{i}}&{{query_params}}">{{i}}</a></li>
         {% endfor %}
 
-        {% if NaverNewsList.has_next %}
+        {% if has_next %}
         <li class="page-item">
             <!-- 산술 연산을 수행하려면 add 템플릿 필터를 사용 -->
             <a class="page-link" href="?page={{endPage|add:1}}&{{query_params}}" aria-label="Next">
@@ -198,6 +201,8 @@
     });
 
     function crawling(){
+        $("#crawling").hide();
+        $("#loading").show();
         $.ajax({
             url: '/run_naver_news/',  // Django URL 패턴에 맞게 수정
             method: 'GET',
