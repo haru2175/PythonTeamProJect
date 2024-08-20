@@ -239,7 +239,9 @@ def run_json_to_csv(request):
             data = json.load(json_file)
 
         # CSV 파일 저장 경로 지정
-        csv_file_path = './data/naver_news_data.csv'
+        file_path = os.getcwd()
+        csv_file_path = file_path + '/TeamProject/data/naver_news_data.csv'
+
 
         # CSV 파일로 저장
         with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
@@ -283,7 +285,6 @@ def run_csv_naver_news(request):
         # CSV 파일 경로
         file_path = os.getcwd()
         csv_file = file_path + '/TeamProject/data/naver_news_data.csv'
-        print(csv_file)
 
         # CSV 파일 읽기 (불필요한 Unnamed 컬럼 제거)
         df = pd.read_csv(csv_file)
