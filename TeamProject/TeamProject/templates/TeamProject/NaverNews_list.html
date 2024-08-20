@@ -12,18 +12,40 @@
 <style>
     .pagination{
         --bs-pagination-hover-color: white;
-        --bs-pagination-hover-bg: green;
-        --bs-pagination-color: green;
+        --bs-pagination-hover-bg: #03C75A; /* 네이버 녹색 */
+        --bs-pagination-color: #03C75A;   /* 네이버 녹색 */
+    }
+    .pagination .active .page-link {
+        background-color: #03C75A; /* 네이버 녹색 */
+        border-color: #03C75A; /* 네이버 녹색 */
+        color: white; /* 텍스트 색상 흰색 */
     }
     #logo{
         margin-left: 220px;
     }
+    .btn-success {
+        background-color: #03C75A; /* 네이버 녹색 */
+        border-color: #03C75A; /* 네이버 녹색 */
+    }
+    .btn-success:hover {
+        background-color: #029A46; /* Hover 시 약간 어두운 녹색 */
+        border-color: #02853C; /* Hover 시 약간 어두운 녹색 */
+    }
+    .btn-group-end button {
+        background-color: #03C75A; /* 네이버 녹색 */
+        border-color: #03C75A; /* 네이버 녹색 */
+    }
+    .btn-group-end button:hover {
+        background-color: #029A46; /* Hover 시 약간 어두운 녹색 */
+        border-color: #02853C; /* Hover 시 약간 어두운 녹색 */
+    }
+
 </style>
 <body>
 {% block content %}
 <div class="container mt-3">
      <img id="logo" src="{% static 'images/logo.png' %}" alt="네이버">
-    <p class="text-center mb-4">실시간 네이버 뉴스를 보다 편리하게 보실 수 있습니다.</p>
+    <!--<p class="text-center mb-4">실시간 네이버 뉴스를 보다 편리하게 보실 수 있습니다.</p>-->
 
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
         <button type="button" class="btn btn-outline-success 전체" onclick="buttonCategory('전체')">전체</button>
@@ -64,7 +86,7 @@
         </tbody>
     </table>
 
-    <br/><br/>
+
 </div>
 
 <div class="btn-group-end" style="margin-left: 620px; padding: 10px;">
@@ -91,7 +113,7 @@
 
         <!--{'beginPage':beginPage, 'endPage':endPage, 'page_range':page_range}-->
         {% for i in page_range %}
-        <li class="page-item"><a class="page-link" href="?page={{i}}&{{query_params}}">{{i}}</a></li>
+        <li class="page-item"><a class="page-link {{i}}" href="?page={{i}}&{{query_params}}">{{i}}</a></li>
         {% endfor %}
 
         {% if NaverNewsList.has_next %}
@@ -120,35 +142,38 @@
     // 특정 파라미터의 값을 가져온다
     var company = urlParams.get('company');
     var category = urlParams.get('category');
+    var pageNumber = urlParams.get('page');
+    console.log(pageNumber);
 
     // company의 값이 있으면 select option의 value를 지정해서 선택해준다.
     if(company != null) { $("#companySelect").val(company); }
 
+    if(pageNumber != null) { $(".page-link." + pageNumber).css({"background-color": "#03C75A", "border-color": "03C75A", "color": "white"});}
 
     if(category == null){
-        $(".btn-outline-success.전체").css({"--bs-btn-color": "#fff","--bs-btn-bg": "#198754","--bs-btn-border-color": "#198754","--bs-btn-hover-color": "#fff", "--bs-btn-hover-bg": "#157347", "--bs-btn-hover-border-color": "#146c43", "--bs-btn-focus-shadow-rgb": "60, 153, 110", "--bs-btn-active-color": "#fff", "--bs-btn-active-bg": "#146c43", "--bs-btn-active-border-color": "#13653f", "--bs-btn-active-shadow": "inset 0 3px 5px rgba(0, 0, 0, 0.125)", "--bs-btn-disabled-color": "#fff", "--bs-btn-disabled-bg": "#198754", "--bs-btn-disabled-border-color": "#198754" });
+        $(".btn-outline-success.전체").css({"--bs-btn-color": "#fff","--bs-btn-bg": "#03C75A","--bs-btn-border-color": "#03C75A","--bs-btn-hover-color": "#fff", "--bs-btn-hover-bg": "#029A46", "--bs-btn-hover-border-color": "#02853C", "--bs-btn-focus-shadow-rgb": "3, 199, 90", "--bs-btn-active-color": "#fff", "--bs-btn-active-bg": "#02853C", "--bs-btn-active-border-color": "#027035", "--bs-btn-active-shadow": "inset 0 3px 5px rgba(0, 0, 0, 0.125)", "--bs-btn-disabled-color": "#fff", "--bs-btn-disabled-bg": "#03C75A", "--bs-btn-disabled-border-color": "#03C75A" });
     } else {
         var containsSlash = category.includes("/");
         if(containsSlash){
             category =  category.replace("/", "\\/");
         }
-        $("." + category + "").css({"--bs-btn-color": "#fff","--bs-btn-bg": "#198754","--bs-btn-border-color": "#198754","--bs-btn-hover-color": "#fff", "--bs-btn-hover-bg": "#157347", "--bs-btn-hover-border-color": "#146c43", "--bs-btn-focus-shadow-rgb": "60, 153, 110", "--bs-btn-active-color": "#fff", "--bs-btn-active-bg": "#146c43", "--bs-btn-active-border-color": "#13653f", "--bs-btn-active-shadow": "inset 0 3px 5px rgba(0, 0, 0, 0.125)", "--bs-btn-disabled-color": "#fff", "--bs-btn-disabled-bg": "#198754", "--bs-btn-disabled-border-color": "#198754" });
+        $("." + category + "").css({"--bs-btn-color": "#fff","--bs-btn-bg": "#03C75A","--bs-btn-border-color": "#03C75A","--bs-btn-hover-color": "#fff", "--bs-btn-hover-bg": "#029A46", "--bs-btn-hover-border-color": "#02853C", "--bs-btn-focus-shadow-rgb": "3, 199, 90", "--bs-btn-active-color": "#fff", "--bs-btn-active-bg": "#02853C", "--bs-btn-active-border-color": "#027035", "--bs-btn-active-shadow": "inset 0 3px 5px rgba(0, 0, 0, 0.125)", "--bs-btn-disabled-color": "#fff", "--bs-btn-disabled-bg": "#03C75A", "--bs-btn-disabled-border-color": "#03C75A" });
     }
 
 
     function buttonCategory(category) {
         if (company) {
             if(category == '전체'){
-                window.location.href =  window.location.origin + '/NaverNews?company=' + company;
+                window.location.href =  window.location.origin + '/NaverNews?page=1&company=' + company;
             } else{
-                window.location.href =  window.location.origin + '/NaverNews?category=' + category + '&company=' + company;
+                window.location.href =  window.location.origin + '/NaverNews?page=1&category=' + category + '&company=' + company;
             }
         }
         else {
             if(category == '전체'){
-                window.location.href =  window.location.origin + '/NaverNews';
+                window.location.href =  window.location.origin + '/NaverNews?page=1';
             } else{
-                window.location.href =  window.location.origin + '/NaverNews?category=' + category;
+                window.location.href =  window.location.origin + '/NaverNews?page=1&category=' + category;
             }
         }
     }
@@ -158,20 +183,21 @@
             var company = $(this).val();
             if (category) {
                 if(company == '전체'){
-                    window.location.href =  window.location.origin + '/NaverNews?category=' + category;
+                    window.location.href =  window.location.origin + '/NaverNews?page=1&category=' + category;
                 } else{
-                    window.location.href =  window.location.origin + '/NaverNews?category=' + category + '&company=' + company;
+                    window.location.href =  window.location.origin + '/NaverNews?page=1&category=' + category + '&company=' + company;
                 }
             }
             else {
                 if(company == '전체'){
-                    window.location.href =  window.location.origin + '/NaverNews';
+                    window.location.href =  window.location.origin + '/NaverNews?page=1';
                 } else{
-                    window.location.href =  window.location.origin + '/NaverNews?company=' + company;
+                    window.location.href =  window.location.origin + '/NaverNews?page=1&company=' + company;
                 }
             }
         });
     });
+
 
 </script>
 </body>
