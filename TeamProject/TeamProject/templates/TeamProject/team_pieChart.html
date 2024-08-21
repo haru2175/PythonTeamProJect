@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container mt-5">
-        {% load static %}
-        <a href="http://127.0.0.1:8000/NaverNews/">
-        <img id="logo" src="{% static 'images/logo.png' %}" alt="네이버">
-        </a>
-        <h1 class="text-center mb-4">언론사별 기사 수</h1>
-    </div>
-
-    <!-- 그래프가 그려질 캔버스 요소  -->
-    <canvas id="myChart" style="max-width: 800px; max-height: 400px;"></canvas>
-
+{% load static %}
+<style>
+    #logo{
+        margin-left: 220px;
+    }
+</style>
+<div class="container mt-5">
+    <img id="logo" src="{% static 'images/logo.png' %}" alt="네이버">
+    <h1 class="text-center mb-4">언론사별 기사 수</h1>
+    <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
+        <canvas id="myChart" style="max-width: 800px; max-height: 400px;"></canvas>
+    </div>z
     <div class="text-end mt-4">
         <button id="buttonBack" class="btn btn-success" onClick="buttonBackBtn()">뒤로가기</button>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@3"></script>

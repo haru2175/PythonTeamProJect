@@ -370,3 +370,9 @@ def chart_view_pie(request):
     return render(request, 'TeamProject/team_pieChart.html', {'data_json': data_json})
 
 
+def wordCloud(request):
+
+    return render(request, 'TeamProject/wordCloud.html')
+
+
+

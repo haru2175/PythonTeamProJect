@@ -32,6 +32,7 @@ urlpatterns = [
     path('run_csv_naver_news/', views.run_csv_naver_news, name='run_csv_naver_news'),
     path('NaverNews/team_barChart',views.chart_view_bar, name='team_barChart'),
     path('NaverNews/team_pieChart/',views.chart_view_pie, name='team_pieChart'),
+    path('NaverNews/wordCloud/',views.wordCloud, name='wordCloud'),
     # path('NaverNews/pagination', views.NaverNews_pagination, name='NaverNews_pagination'),
 ]
 
