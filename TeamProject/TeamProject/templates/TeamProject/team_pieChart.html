@@ -6,10 +6,18 @@
     #logo{
         margin-left: 220px;
     }
+    .custom-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 36px;
+        color: #03C75A;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        letter-spacing: 2px;
+    }
 </style>
 <div class="container mt-5">
     <img id="logo" src="{% static 'images/logo.png' %}" alt="네이버">
-    <h1 class="text-center mb-4">언론사별 기사 수</h1>
+    <h1 class="custom-title text-center mb-4">언론사 별 기사 수 파이 차트</h1>
     <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
         <canvas id="myChart" style="max-width: 800px; max-height: 400px;"></canvas>
     </div>z

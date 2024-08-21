@@ -82,14 +82,20 @@
         </tr>
         </thead>
         <tbody>
-        {% for news in NaverNewsList %}
-        <tr>
-            <td>{{ news.nIdx }}</td>
-            <td>{{ news.nCategory }}</td>
-            <td>{{ news.nCompany }}</td>
-            <td><a href="/NaverNews/view?idx={{news.nIdx}}"/> {{ news.nTitle }}</td>
-        </tr>
-        {% endfor %}
+            {% if NaverNewsList %}
+                {% for news in NaverNewsList %}
+                <tr>
+                    <td>{{ news.nIdx }}</td>
+                    <td>{{ news.nCategory }}</td>
+                    <td>{{ news.nCompany }}</td>
+                    <td><a href="/NaverNews/view?idx={{news.nIdx}}"/> {{ news.nTitle }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">조건에 맞는 뉴스가 없습니다.</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 
