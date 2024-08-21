@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">언론사별 기사 수</h1>
+
+    </div>
+
+    <!-- 그래프가 그려질 캔버스 요소  -->
+    <canvas id="myChart" style="max-width: 800px; max-height: 400px;"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@3"></script>
+
+   <script>
+    // django의 view 파일에서 넘어온 json 타입의 데이터
+    const data = {{ data_json|safe }};
+    const labels = data.map(item => item.nCompany);
+    const counts = data.map(item => item.count);
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    let myChart;
+    function createChart(type) {
+        if (myChart) { // 기존에 생성된 차트가 있으면 삭제
+            myChart.destroy();
+        }
+
+        myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '기사 수',
+                    data: counts,
+                    backgroundColor: type === 'pie' ? ['#FF6384', '#36A2EB', '#FFCE56', '#E0E0E0'] : ['red', 'blue', 'yellow', 'green'],
+                }]
+            },
+            options: {
+                responsive: true, // 반응형 차트 설정
+                plugins: {
+                    legend: {
+                        position: 'top', // 범례 위치 설정
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                // 툴팁에 표시할 라벨 및 값 포맷
+                                return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    createChart('pie');  // 차트 생성 함수 호출
+</script>
+
+{% endblock %}

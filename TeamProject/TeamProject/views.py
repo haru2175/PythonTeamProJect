@@ -331,4 +331,42 @@ def run_csv_naver_news(request):
             print("작업이 실패했습니다.")
     return HttpResponse(success)
 
+def chart_view_bar(request):
+    # 데이터 불러오기
+    file_path = os.getcwd()
+    filename = file_path + '/TeamProject/data/naver_news_data.csv'
+
+    df = pd.read_csv(filename)
+
+    # 언론사별 기사 수 계산
+    article_counts = df['nCompany'].value_counts()
+
+    # 데이터를 JSON 형식으로 변환
+    data_json =[{'nCompany': nCompany, 'count': count} for nCompany, count in article_counts.items()]
+
+    # 'team_barChart.html' 템플릿 렌더링
+    return render(request, 'TeamProject/team_barChart.html', {'data_json': data_json})
+
+def chart_view_pie(request):
+    # 데이터 불러오기
+    file_path = os.getcwd()
+    filename = file_path + '/TeamProject/data/naver_news_data.csv'
+
+    df = pd.read_csv(filename)
+
+    # 언론사별 기사 수 계산
+    article_counts = df['nCompany'].value_counts()
+
+    # 상위 10개 언론사만 선택
+    top_10_counts = article_counts[:10]
+
+    # 데이터를 JSON 형식으로 변환
+    data_json = [{'nCompany': nCompany, 'count': count} for nCompany, count in top_10_counts.items()]
+
+    # data_json 값 출력
+    print(data_json)
+
+    # 'team_pieChart.html' 템플릿 렌더링
+    return render(request, 'TeamProject/team_pieChart.html', {'data_json': data_json})
+
 

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">언론사별 기사 수</h1>
+    </div>
+
+    <!-- 그래프가 그려질 캔버스 요소  -->
+    <canvas id="myChart" style="max-width: 800px; max-height: 400px;"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // django의 view 파일에서 넘어온 json 타입의 데이터
+        const data = {{ data_json|safe }};
+        console.log(data);
+
+        // 데이터에서 레이블과 숫자 카운트를 추출
+        const labels = data.map(item => item.nCompany);
+        const counts = data.map(item => item.count);
+
+        // 캔버스 요소를 찾습니다.(그림 그릴 곳)
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        // 차트 생성
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '기사 수',
+                    data: counts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
