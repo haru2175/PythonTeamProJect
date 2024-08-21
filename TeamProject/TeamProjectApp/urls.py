@@ -30,8 +30,8 @@ urlpatterns = [
     path('run_naver_news/', views.run_naver_news, name='run_naver_news'),
     path('run_json_to_csv/', views.run_json_to_csv, name='run_json_to_csv'),
     path('run_csv_naver_news/', views.run_csv_naver_news, name='run_csv_naver_news'),
-    path('chart/team_barChart',views.chart_view_bar, name='chart/team_barChart'),
-    path('chart/team_pieChart/',views.chart_view_pie, name='chart/team_pieChart'),
+    path('NaverNews/team_barChart',views.chart_view_bar, name='team_barChart'),
+    path('NaverNews/team_pieChart/',views.chart_view_pie, name='team_pieChart'),
     # path('NaverNews/pagination', views.NaverNews_pagination, name='NaverNews_pagination'),
 ]
 

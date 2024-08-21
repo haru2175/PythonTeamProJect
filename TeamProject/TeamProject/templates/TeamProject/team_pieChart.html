@@ -2,17 +2,27 @@
 
 {% block content %}
     <div class="container mt-5">
+        {% load static %}
+        <a href="http://127.0.0.1:8000/NaverNews/">
+        <img id="logo" src="{% static 'images/logo.png' %}" alt="네이버">
+        </a>
         <h1 class="text-center mb-4">언론사별 기사 수</h1>
-
     </div>
 
     <!-- 그래프가 그려질 캔버스 요소  -->
     <canvas id="myChart" style="max-width: 800px; max-height: 400px;"></canvas>
 
+    <div class="text-end mt-4">
+        <button id="buttonBack" class="btn btn-success" onClick="buttonBackBtn()">뒤로가기</button>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@3"></script>
 
    <script>
+       function buttonBackBtn() {
+           window.location.href =  window.location.origin + '/NaverNews';
+       }
     // django의 view 파일에서 넘어온 json 타입의 데이터
     const data = {{ data_json|safe }};
     const labels = data.map(item => item.nCompany);
